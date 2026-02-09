@@ -1,0 +1,133 @@
+# ============================================
+# BANCO DE DADOS E DADOS - ORDEM CORRETA!
+# ============================================
+
+# PRIMEIRO: Diga o que NÃO ignorar
+!database-schema.sql  # <- Deve vir ANTES!
+
+# DEPOIS: Diga o que ignorar
+*.db
+*.sqlite
+postgres_data/
+data/
+backups/
+*.sql  # <- Esta linha IGNORA todos .sql, então precisa vir DEPOIS da exceção!
+
+# ============================================
+# BACKEND (Spring Boot)
+# ============================================
+
+# IGNORE o .gitignore do backend (ADICIONE ESTA LINHA)
+backend-autoflex/.gitignore
+
+# Maven
+backend-autoflex/target/
+backend-autoflex/.classpath
+backend-autoflex/.project
+backend-autoflex/.settings/
+backend-autoflex/.factorypath
+
+# Logs
+backend-autoflex/logs/
+backend-autoflex/*.log
+
+# Configurações sensíveis
+backend-autoflex/application.properties
+backend-autoflex/.env
+backend-autoflex/*.local
+backend-autoflex/*.secret
+
+# IDE
+backend-autoflex/.idea/
+backend-autoflex/*.iml
+backend-autoflex/.vscode/
+
+# ============================================
+# FRONTEND (React)
+# ============================================
+
+# IGNORE o .gitignore do frontend (ADICIONE ESTA LINHA)
+frontend-autoflex/.gitignore
+
+# Dependências
+frontend-autoflex/node_modules/
+frontend-autoflex/.pnpm-store/
+
+# Builds
+frontend-autoflex/dist/
+frontend-autoflex/dist-ssr/
+frontend-autoflex/.next/
+
+# Cache
+frontend-autoflex/.cache/
+
+# Logs
+frontend-autoflex/*.log
+frontend-autoflex/npm-debug.log*
+frontend-autoflex/yarn-debug.log*
+frontend-autoflex/yarn-error.log*
+
+# Configurações sensíveis
+frontend-autoflex/.env
+frontend-autoflex/.env.local
+frontend-autoflex/.env.development.local
+frontend-autoflex/.env.test.local
+frontend-autoflex/.env.production.local
+
+# IDE
+frontend-autoflex/.vscode/
+frontend-autoflex/.idea/
+frontend-autoflex/.vs/
+
+# ============================================
+# DOCKER
+# ============================================
+
+docker-data/
+*.dockerignore
+
+# ============================================
+# SISTEMA E IDE
+# ============================================
+
+# Sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE Geral
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+
+# ============================================
+# OUTROS
+# ============================================
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+
+# Coverage directory
+coverage/
+.nyc_output/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
