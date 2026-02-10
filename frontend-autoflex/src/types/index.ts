@@ -3,27 +3,27 @@
 // ========== TIPOS BÁSICOS ==========
 
 export interface RawMaterial {
-  id: string; // Frontend usa string (convertido de number do backend)
+  id: string; 
   code: string;
   name: string;
   stockQuantity: number;
 }
 
-// CORREÇÃO: Tipos para dados do backend PostgreSQL
+
 export interface BackendRawMaterial {
-  id: number; // Backend usa number
+  id: number; 
   code: string;
   name: string;
-  stock_quantity: number; // snake_case do PostgreSQL
+  stock_quantity: number; 
 }
 
 export interface ProductRawMaterial {
-  rawMaterialId: string; // Frontend usa string
+  rawMaterialId: string; 
   rawMaterial?: RawMaterial; // Opcional
   quantityRequired: number;
 }
 
-// CORREÇÃO: Tipos para dados do backend PostgreSQL
+
 export interface BackendProductMaterial {
   id: number; // ID da associação
   required_quantity: number; // snake_case
@@ -32,35 +32,34 @@ export interface BackendProductMaterial {
 }
 
 export interface Product {
-  id: string; // Frontend usa string
+  id: string; 
   code: string;
   name: string;
   value: number;
   composition: ProductRawMaterial[];
 
-  // Campo opcional para dados diretos do backend
-  // O PostgreSQL retorna IDs como number
+
   productMaterials?: Array<{
     id: number; // ID da associação
     requiredQuantity: number; // camelCase convertido
     rawMaterial?: {
-      id: number; // ID da matéria-prima (number no backend)
+      id: number; 
       code: string;
       name: string;
-      stockQuantity: number; // camelCase convertido de stock_quantity
+      stockQuantity: number;
     };
   }>;
 }
 
-// CORREÇÃO: Tipo para backend PostgreSQL
+
 export interface BackendProduct {
-  id: number; // Backend usa number
+  id: number; 
   code: string;
   name: string;
   value: number;
   created_at?: string;
   updated_at?: string;
-  productMaterials?: BackendProductMaterial[]; // snake_case ou camelCase?
+  productMaterials?: BackendProductMaterial[]; 
 }
 
 // ========== PRODUÇÃO ==========
@@ -70,7 +69,7 @@ export interface ProductionSuggestion {
   maxQuantity: number;
   totalValue: number;
   limitingFactor?: {
-    rawMaterialId: string; // Convertido para string
+    rawMaterialId: string; 
     quantityRequired: number;
     rawMaterial: RawMaterial;
   };
@@ -330,7 +329,7 @@ export function convertBackendProduct(backend: BackendProduct): Product {
     code: backend.code,
     name: backend.name,
     value: backend.value,
-    composition: [], // Será preenchido pelo api.ts
+    composition: [], 
     productMaterials: backend.productMaterials?.map((pm) => ({
       id: pm.id,
       requiredQuantity: pm.required_quantity,
