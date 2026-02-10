@@ -17,7 +17,7 @@ public interface ProductMaterialRepository extends ListCrudRepository<ProductMat
     
     List<ProductMaterial> findByRawMaterialId(Long rawMaterialId);
     
-    // Método que você está usando no ProductController
+   
     Optional<ProductMaterial> findByProductAndRawMaterial(Product product, RawMaterial rawMaterial);
     
 }
