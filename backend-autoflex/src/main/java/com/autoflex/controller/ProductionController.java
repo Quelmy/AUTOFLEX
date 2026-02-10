@@ -80,7 +80,7 @@ public class ProductionController {
                 suggestion.put("product", productMap);
                 suggestion.put("maxQuantity", maxQuantity);
                 
-                // CORREÇÃO: Multiplicar BigDecimal por int usando multiply()
+                
                 BigDecimal totalValue = product.getValue().multiply(BigDecimal.valueOf(maxQuantity));
                 suggestion.put("totalValue", totalValue);
                 
