@@ -1,4 +1,4 @@
-package com.autoflex.service;  // ← ADICIONE ESTA LINHA
+package com.autoflex.service; 
 
 import com.autoflex.model.Product;
 import com.autoflex.repository.ProductRepository;
