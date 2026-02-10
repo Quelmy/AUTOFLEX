@@ -78,7 +78,7 @@ export default function Dashboard() {
   const [useMockData, setUseMockData] = useState(false);
   const [mockSuggestions, setMockSuggestions] = useState<any[]>([]);
 
-  // Gerar sugestões mock quando usar dados mock
+ 
   useEffect(() => {
     if (useMockData) {
       const suggestions = getMockSuggestions();
@@ -101,7 +101,7 @@ export default function Dashboard() {
         message: health.message,
         details: health,
       };
-      console.log("✅ Health:", health);
+      console.log(" Health:", health);
     } catch (error) {
       results.health = {
         status: "error",
@@ -120,7 +120,7 @@ export default function Dashboard() {
         message: rawResponse.ok ? "Conectado" : `Erro ${rawResponse.status}`,
         data: rawResponse.ok ? await rawResponse.json() : null,
       };
-      console.log(`✅ Raw Materials: ${rawResponse.ok ? "OK" : "Erro"}`);
+      console.log(` Raw Materials: ${rawResponse.ok ? "OK" : "Erro"}`);
     } catch (error) {
       results.rawMaterials = {
         status: "error",
@@ -141,7 +141,7 @@ export default function Dashboard() {
           : `Erro ${productsResponse.status}`,
         data: productsResponse.ok ? await productsResponse.json() : null,
       };
-      console.log(`✅ Products: ${productsResponse.ok ? "OK" : "Erro"}`);
+      console.log(` Products: ${productsResponse.ok ? "OK" : "Erro"}`);
     } catch (error) {
       results.products = {
         status: "error",
@@ -189,11 +189,11 @@ export default function Dashboard() {
     setLastError("");
     setHasCriticalError(false);
 
-    console.log("🔄 Iniciando verificação da API Spring Boot...");
+    console.log(" Iniciando verificação da API Spring Boot...");
 
     try {
       // Testar conexão com API Spring Boot primeiro
-      console.log("📡 Testando conexão com health endpoint...");
+      console.log("Testando conexão com health endpoint...");
 
       const healthResponse = await fetch("http://localhost:8080/health", {
         method: "GET",
@@ -212,7 +212,7 @@ export default function Dashboard() {
       if (!healthResponse.ok) {
         const errorText = await healthResponse.text();
         console.error(
-          "❌ Health check falhou:",
+          " Health check falhou:",
           healthResponse.status,
           errorText,
         );
@@ -230,12 +230,12 @@ export default function Dashboard() {
 
       // Se chegou aqui, a API está online
       const healthData = await healthResponse.json();
-      console.log("✅ Health check OK:", healthData);
+      console.log(" Health check OK:", healthData);
       setApiStatus("online");
       setUseMockData(false);
 
       // Carregar dados reais - com tratamento individual de erro
-      console.log("📥 Carregando dados do backend...");
+      console.log(" Carregando dados do backend...");
 
       let successCount = 0;
       const totalRequests = 3;
@@ -243,7 +243,7 @@ export default function Dashboard() {
       try {
         await fetchProducts();
         successCount++;
-        console.log(`✅ Produtos carregados: ${products?.length || 0} itens`);
+        console.log(`Produtos carregados: ${products?.length || 0} itens`);
       } catch (productError: any) {
         console.error("❌ Erro ao carregar produtos:", productError);
         setLastError((prev) => prev + "Erro em produtos. ");
@@ -253,10 +253,10 @@ export default function Dashboard() {
         await fetchRawMaterials();
         successCount++;
         console.log(
-          `✅ Matérias-primas carregadas: ${rawMaterials?.length || 0} itens`,
+          `Matérias-primas carregadas: ${rawMaterials?.length || 0} itens`,
         );
       } catch (rawMaterialError: any) {
-        console.error("❌ Erro ao carregar matérias-primas:", rawMaterialError);
+        console.error(" Erro ao carregar matérias-primas:", rawMaterialError);
         setLastError((prev) => prev + "Erro em matérias-primas. ");
       }
 
@@ -264,20 +264,20 @@ export default function Dashboard() {
         await fetchProductionSuggestions();
         successCount++;
         console.log(
-          `✅ Sugestões carregadas: ${productionSuggestions?.length || 0} itens`,
+          ` Sugestões carregadas: ${productionSuggestions?.length || 0} itens`,
         );
       } catch (suggestionError: any) {
-        console.error("❌ Erro ao carregar sugestões:", suggestionError);
+        console.error(" Erro ao carregar sugestões:", suggestionError);
         setLastError((prev) => prev + "Erro em sugestões. ");
       }
 
       console.log(
-        `📊 ${successCount}/${totalRequests} carregamentos bem-sucedidos`,
+        ` ${successCount}/${totalRequests} carregamentos bem-sucedidos`,
       );
 
       // Se todos falharem ou não houver dados, usar mock como fallback
       if (successCount === 0) {
-        console.log("⚠️ Nenhum dado carregado da API, usando dados mock");
+        console.log(" Nenhum dado carregado da API, usando dados mock");
         setUseMockData(true);
         setApiStatus("online-mock");
       }
@@ -285,7 +285,7 @@ export default function Dashboard() {
       // Invalidar cache após carregar novos dados
       cachedDashboardData = null;
     } catch (error: any) {
-      console.error("❌ Erro crítico ao conectar com API:", error);
+      console.error(" Erro crítico ao conectar com API:", error);
 
       // Detectar tipo de erro
       const errorMessage = error.message || error.toString();
@@ -305,13 +305,13 @@ export default function Dashboard() {
       setApiStatus("offline");
 
       // Usar dados mock como fallback
-      console.log("🛠️ Usando dados mock após erro de conexão");
+      console.log(" Usando dados mock após erro de conexão");
       setUseMockData(true);
       setApiStatus("online-mock");
     } finally {
       setIsRefreshing(false);
       setIsInitialLoad(false);
-      console.log("✅ Verificação concluída");
+      console.log(" Verificação concluída");
     }
   }, [
     fetchProducts,
