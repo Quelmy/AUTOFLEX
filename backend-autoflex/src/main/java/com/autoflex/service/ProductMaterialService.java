@@ -1,4 +1,4 @@
-package com.autoflex.service;  // ← ADICIONE O PACKAGE
+package com.autoflex.service;  
 
 import com.autoflex.model.Product;
 import com.autoflex.model.RawMaterial;
