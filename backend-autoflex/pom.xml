@@ -43,7 +43,7 @@
             
         </dependency>
 
-        <!-- Lombok - COMENTE ESTA DEPENDÊNCIA TEMPORARIAMENTE -->
+        <!-- Lombok -->
         <!--
         <dependency>
             <groupId>org.projectlombok</groupId>
