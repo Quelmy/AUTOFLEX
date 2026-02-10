@@ -128,7 +128,7 @@ export default function Production() {
     fetchProductionSuggestions();
   }, [fetchProductionSuggestions]);
 
-  // Renderização CORRIGIDA para PostgreSQL
+  
   const renderComposition = (suggestion: ProductionSuggestion) => {
     try {
       // Extrair composition do productMaterials
@@ -137,7 +137,7 @@ export default function Production() {
       if (!productMaterials.length) return null;
 
       return productMaterials.map((pm: any, index: number) => {
-        // CORREÇÃO: Acessar rawMaterial corretamente
+
         const rawMaterial = pm.rawMaterial || {};
         const rawMaterialId = rawMaterial.id || pm.rawMaterialId;
         const quantityRequired = pm.requiredQuantity || 0;
@@ -291,7 +291,7 @@ export default function Production() {
           </div>
         )}
 
-        {/* Suggestions List - Renderização CORRIGIDA */}
+        {/* Suggestions List */}
         {!loading && suggestions.length === 0 ? (
           <div className="rounded-xl border border-border bg-card p-12 text-center">
             <AlertCircle className="mx-auto h-12 w-12 text-muted-foreground" />
@@ -389,7 +389,7 @@ export default function Production() {
                   </CardHeader>
 
                   <CardContent>
-                    {/* Composition Details - Renderizado pela função corrigida */}
+                    {/* Composition Details  */}
                     <div className="pt-3 border-t">
                       <p className="text-sm font-medium text-muted-foreground mb-3">
                         Matérias-primas necessárias para{" "}
