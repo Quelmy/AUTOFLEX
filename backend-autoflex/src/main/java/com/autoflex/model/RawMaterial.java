@@ -3,7 +3,7 @@ package com.autoflex.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore; // ← ADICIONE ESTA IMPORT
+import com.fasterxml.jackson.annotation.JsonIgnore; 
 
 @Entity
 @Table(name = "raw_materials")
@@ -28,7 +28,7 @@ public class RawMaterial {
     private BigDecimal unitPrice;
     
     @OneToMany(mappedBy = "rawMaterial")
-    @JsonIgnore // ← ADICIONE ESTA ANOTAÇÃO para evitar serialização
+    @JsonIgnore
     private List<ProductMaterial> productMaterials;
     
     public RawMaterial() {}
@@ -70,7 +70,7 @@ public class RawMaterial {
     public BigDecimal getUnitPrice() { return unitPrice; }
     public void setUnitPrice(BigDecimal unitPrice) { this.unitPrice = unitPrice; }
     
-    @JsonIgnore // ← ADICIONE TAMBÉM AQUI
+    @JsonIgnore 
     public List<ProductMaterial> getProductMaterials() { 
         return productMaterials; 
     }
