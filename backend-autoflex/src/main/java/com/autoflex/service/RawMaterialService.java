@@ -66,14 +66,14 @@ public class RawMaterialService {
         RawMaterial material = rawMaterialRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Matéria-prima não encontrada com ID: " + id));
         
-        int newStock = material.getQuantity() + quantity;  // ← ALTERADO: getQuantity() em vez de getStockQuantity()
+        int newStock = material.getQuantity() + quantity;  
         // Validação opcional: não permitir estoque negativo
         if (newStock < 0) {
             throw new RuntimeException("Estoque não pode ficar negativo. Estoque atual: " + 
                                      material.getQuantity() + ", tentativa de remover: " + Math.abs(quantity));
         }
         
-        material.setQuantity(newStock);  // ← ALTERADO: setQuantity() em vez de setStockQuantity()
+        material.setQuantity(newStock);  
         return rawMaterialRepository.save(material);
     }
 
@@ -87,7 +87,7 @@ public class RawMaterialService {
     @Transactional(readOnly = true)
     public boolean checkStockAvailability(Long rawMaterialId, Integer requiredQuantity) {
         return rawMaterialRepository.findById(rawMaterialId)
-                .map(material -> material.getQuantity() >= requiredQuantity)  // ← ALTERADO: getQuantity()
+                .map(material -> material.getQuantity() >= requiredQuantity) 
                 .orElse(false);
     }
 }
