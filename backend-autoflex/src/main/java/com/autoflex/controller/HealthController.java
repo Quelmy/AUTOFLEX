@@ -12,7 +12,7 @@ public class HealthController {
     @GetMapping("/")
     public Map<String, Object> home() {
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "🚀 Autoflex API");
+        response.put("message", " Autoflex API");
         response.put("status", "running");
         response.put("timestamp", LocalDateTime.now());
         response.put("endpoints", Map.of(
