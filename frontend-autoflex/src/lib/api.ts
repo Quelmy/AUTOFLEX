@@ -3,14 +3,14 @@ import { Product, ProductionSuggestion, RawMaterial } from "@/types";
 // @/lib/api.ts
 const API_URL = "http://localhost:8080";
 
-// Tipos para o Spring Boot - AJUSTADOS conforme dados reais
+// Tipos para o Spring Boot 
 interface SpringRawMaterial {
   id: number;
   code: string;
   name: string;
-  unit: string; // O Spring Boot ESTÁ retornando "unit"
-  quantity: number; // O Spring Boot retorna "quantity" (não stock_quantity)
-  unitPrice: number; // O Spring Boot retorna "unitPrice" (camelCase)
+  unit: string;
+  quantity: number; 
+  unitPrice: number; 
 }
 
 interface SpringProduct {
@@ -49,11 +49,11 @@ const convertSpringToProduct = (spring: SpringProduct): Product => ({
   code: spring.code,
   name: spring.name,
   value: spring.value || 0,
-  composition: [], // Deixa vazio por enquanto para evitar erros
+  composition: [], 
   productMaterials: [],
 });
 
-// API para Produtos - VERSÃO SIMPLIFICADA
+// API para Produtos 
 export const productApi = {
   getAll: async (): Promise<Product[]> => {
     console.log("Fetching products from:", `${API_URL}/products`);
@@ -65,7 +65,7 @@ export const productApi = {
       }
       const springProducts: SpringProduct[] = await response.json();
 
-      // Converter produtos SEM buscar materiais (para evitar erro 500)
+      // Converter produtos SEM buscar materiais 
       const products = springProducts.map(convertSpringToProduct);
 
       console.log("Products loaded (simplified):", products.length);
@@ -100,7 +100,6 @@ export const productApi = {
     }
   },
 
-  // ... (outros métodos mantidos mas simplificados se necessário)
   create: async (productData: Omit<Product, "id">): Promise<Product> => {
     console.log("Creating product:", productData);
     const springData = {
@@ -208,7 +207,7 @@ export const productApi = {
   },
 };
 
-// API para Matérias-Primas - CORRIGIDO E SIMPLIFICADO
+
 export const rawMaterialApi = {
   getAll: async (): Promise<RawMaterial[]> => {
     console.log("Fetching raw materials from:", `${API_URL}/raw-materials`);
@@ -217,7 +216,7 @@ export const rawMaterialApi = {
       if (!response.ok) {
         const error = await response.text();
         console.error("Failed to fetch raw materials:", error);
-        return []; // Retorna array vazio em vez de throw
+        return []; // Retorna array vazio 
       }
 
       const springMaterials: SpringRawMaterial[] = await response.json();
@@ -246,7 +245,7 @@ export const rawMaterialApi = {
   ): Promise<RawMaterial> => {
     console.log("Creating raw material:", materialData);
 
-    // CORREÇÃO: Enviar todos os campos que o Spring Boot espera
+    
     const springData = {
       code: materialData.code,
       name: materialData.name,
@@ -329,7 +328,7 @@ export const rawMaterialApi = {
   },
 };
 
-// API para Produção - CORRIGIDA
+
 export const productionApi = {
   getSuggestions: async (): Promise<ProductionSuggestion[]> => {
     console.log(
@@ -441,7 +440,7 @@ export const productionApi = {
   },
 };
 
-// Health check - CORRIGIDO
+
 export const healthApi = {
   check: async (): Promise<{ status: string; message: string }> => {
     try {
@@ -466,7 +465,7 @@ export const healthApi = {
   },
 };
 
-// Função de debug aprimorada
+
 export const testApiConnection = async () => {
   console.log("=== TESTANDO CONEXÃO COM API SPRING BOOT ===");
 
@@ -474,17 +473,17 @@ export const testApiConnection = async () => {
     // Teste 1: Health
     console.log("1. Testando health endpoint...");
     const health = await healthApi.check();
-    console.log("✅ Health:", health);
+    console.log(" Health:", health);
 
     // Teste 2: Raw Materials
     console.log("2. Testando raw materials...");
     const rawResponse = await fetch(`${API_URL}/raw-materials`);
     if (rawResponse.ok) {
       const rawData = await rawResponse.json();
-      console.log(`✅ Raw Materials: ${rawData.length} itens`);
+      console.log(` Raw Materials: ${rawData.length} itens`);
       console.log("Amostra:", rawData.slice(0, 2));
     } else {
-      console.log(`❌ Raw Materials: ${rawResponse.status}`);
+      console.log(` Raw Materials: ${rawResponse.status}`);
     }
 
     // Teste 3: Products
@@ -492,10 +491,10 @@ export const testApiConnection = async () => {
     const productsResponse = await fetch(`${API_URL}/products`);
     if (productsResponse.ok) {
       const productsData = await productsResponse.json();
-      console.log(`✅ Products: ${productsData.length} itens`);
+      console.log(` Products: ${productsData.length} itens`);
       console.log("Amostra:", productsData.slice(0, 2));
     } else {
-      console.log(`❌ Products: ${productsResponse.status}`);
+      console.log(` Products: ${productsResponse.status}`);
     }
 
     // Teste 4: Production Suggestions
@@ -503,15 +502,15 @@ export const testApiConnection = async () => {
     const prodResponse = await fetch(`${API_URL}/production/suggestions`);
     if (prodResponse.ok) {
       const prodData = await prodResponse.json();
-      console.log(`✅ Production Suggestions: ${prodData.length} itens`);
+      console.log(`Production Suggestions: ${prodData.length} itens`);
       console.log("Amostra:", prodData[0]);
     } else {
       console.log(
-        `⚠️ Production Suggestions: ${prodResponse.status} (pode ser normal)`,
+        ` Production Suggestions: ${prodResponse.status} (pode ser normal)`,
       );
     }
   } catch (error) {
-    console.error("❌ Erro no teste:", error);
+    console.error(" Erro no teste:", error);
   }
 
   console.log("=== FIM DO TESTE ===");
