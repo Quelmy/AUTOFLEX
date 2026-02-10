@@ -122,9 +122,9 @@ export default function Products() {
     }
   };
 
-  // **CORREÇÃO PRINCIPAL:** Extrair composition do produto para PostgreSQL
+  
   const getProductComposition = (product: Product) => {
-    // Prioridade 1: productMaterials do PostgreSQL (estrutura atual)
+
     if (product.productMaterials && product.productMaterials.length > 0) {
       return product.productMaterials.map((pm: any) => {
         const rawMaterial = pm.rawMaterial || {};
@@ -141,7 +141,6 @@ export default function Products() {
       });
     }
 
-    // Prioridade 2: composition do frontend (fallback)
     if (product.composition && product.composition.length > 0) {
       return product.composition;
     }
