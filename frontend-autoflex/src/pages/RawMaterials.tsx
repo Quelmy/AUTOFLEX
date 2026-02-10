@@ -76,7 +76,7 @@ export default function RawMaterials() {
     setIsDeleteOpen(true);
   };
 
-  // **CORREÇÃO:** Verificar se a matéria-prima está sendo usada (PostgreSQL)
+
   const checkIfMaterialIsUsed = (materialId: string): boolean => {
     return products.some((product) => {
       // Verificar em composition (frontend)
@@ -86,7 +86,7 @@ export default function RawMaterials() {
         return true;
       }
 
-      // **CORREÇÃO:** Verificar em productMaterials (backend PostgreSQL)
+   
       if (product.productMaterials && product.productMaterials.length > 0) {
         return product.productMaterials.some((pm: any) => {
           const rawMaterialId = String(
@@ -100,7 +100,6 @@ export default function RawMaterials() {
     });
   };
 
-  // **CORREÇÃO:** Obter produtos que usam a matéria-prima (PostgreSQL)
   const getProductsUsingMaterial = (materialId: string): Product[] => {
     return products.filter((product) => {
       // Verificar em composition (frontend)
@@ -110,7 +109,7 @@ export default function RawMaterials() {
         return true;
       }
 
-      // **CORREÇÃO:** Verificar em productMaterials (backend PostgreSQL)
+
       if (product.productMaterials && product.productMaterials.length > 0) {
         return product.productMaterials.some((pm: any) => {
           const rawMaterialId = String(
